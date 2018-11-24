@@ -1,4 +1,4 @@
-package com.sagar.mymovies;
+package com.example.moviesbloc;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
