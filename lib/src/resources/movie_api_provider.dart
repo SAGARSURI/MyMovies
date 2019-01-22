@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:http/http.dart' show Client;
 import 'dart:convert';
+import 'package:http/http.dart' show Client;
 import '../models/item_model.dart';
 import '../models/trailer_model.dart';
 
