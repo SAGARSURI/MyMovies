@@ -73,107 +73,105 @@ class MovieDetailState extends State<MovieDetail> {
         top: false,
         bottom: false,
         child: NestedScrollView(
-          headerSliverBuilder: (BuildContext context,
-              bool innerBoxIsScrolled) {
-            return <Widget>[
-              SliverAppBar(
-                expandedHeight: 200.0,
-                floating: false,
-                pinned: true,
-                elevation: 0.0,
-                flexibleSpace: FlexibleSpaceBar(
-                    background: Image.network(
-                      "https://image.tmdb.org/t/p/w500$posterUrl",
-                      fit: BoxFit.cover,
-                    )),
-              ),
-            ];
-          },
-          body: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
+              return <Widget>[
+                SliverAppBar(
+                  expandedHeight: 200.0,
+                  floating: false,
+                  pinned: true,
+                  elevation: 0.0,
+                  flexibleSpace: FlexibleSpaceBar(
+                      background: Image.network(
+                    "https://image.tmdb.org/t/p/w500$posterUrl",
+                    fit: BoxFit.cover,
+                  )),
+                ),
+              ];
+            },
+            body: ListView(
               children: <Widget>[
-                Container(margin: EdgeInsets.only(top: 5.0)),
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Container(margin: EdgeInsets.only(top: 8.0,
-                    bottom: 8.0)),
-                Row(
-                  children: <Widget>[
-                    Icon(
-                      Icons.favorite,
-                      color: Colors.red,
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 1.0,
-                          right: 1.0),
-                    ),
-                    Text(
-                      voteAverage,
-                      style: TextStyle(
-                        fontSize: 18.0,
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(margin: EdgeInsets.only(top: 5.0)),
+                      Text(
+                        title,
+                        style: TextStyle(
+                          fontSize: 25.0,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 10.0,
-                          right: 10.0),
-                    ),
-                    Text(
-                      releaseDate,
-                      style: TextStyle(
-                        fontSize: 18.0,
+                      Container(margin: EdgeInsets.only(top: 8.0, bottom: 8.0)),
+                      Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.favorite,
+                            color: Colors.red,
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(left: 1.0, right: 1.0),
+                          ),
+                          Text(
+                            voteAverage,
+                            style: TextStyle(
+                              fontSize: 18.0,
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(left: 10.0, right: 10.0),
+                          ),
+                          Text(
+                            releaseDate,
+                            style: TextStyle(
+                              fontSize: 18.0,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
-                Container(margin: EdgeInsets.only(top: 8.0,
-                    bottom: 8.0)),
-                Text(description),
-                Container(margin: EdgeInsets.only(top: 8.0,
-                    bottom: 8.0)),
-                Text(
-                  "Trailer",
-                  style: TextStyle(
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Container(margin: EdgeInsets.only(top: 8.0,
-                    bottom: 8.0)),
-                StreamBuilder(
-                  stream: bloc.movieTrailers,
-                  builder:
-                      (context, AsyncSnapshot<Future<TrailerModel>> snapshot) {
-                    if (snapshot.hasData) {
-                      return FutureBuilder(
-                        future: snapshot.data,
+                      Container(margin: EdgeInsets.only(top: 8.0, bottom: 8.0)),
+                      Text(description),
+                      Container(margin: EdgeInsets.only(top: 8.0, bottom: 8.0)),
+                      Text(
+                        "Trailer",
+                        style: TextStyle(
+                          fontSize: 25.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Container(margin: EdgeInsets.only(top: 8.0, bottom: 8.0)),
+                      StreamBuilder(
+                        stream: bloc.movieTrailers,
                         builder: (context,
-                            AsyncSnapshot<TrailerModel> itemSnapShot) {
-                          if (itemSnapShot.hasData) {
-                            if (itemSnapShot.data.results.length > 0)
-                              return trailerLayout(itemSnapShot.data);
-                            else
-                              return noTrailer(itemSnapShot.data);
+                            AsyncSnapshot<Future<TrailerModel>> snapshot) {
+                          if (snapshot.hasData) {
+                            return FutureBuilder(
+                              future: snapshot.data,
+                              builder: (context,
+                                  AsyncSnapshot<TrailerModel> itemSnapShot) {
+                                if (itemSnapShot.hasData) {
+                                  if (itemSnapShot.data.results.length > 0)
+                                    return trailerLayout(itemSnapShot.data);
+                                  else
+                                    return noTrailer(itemSnapShot.data);
+                                } else {
+                                  return Center(
+                                      child: CircularProgressIndicator());
+                                }
+                              },
+                            );
                           } else {
                             return Center(child: CircularProgressIndicator());
                           }
                         },
-                      );
-                    } else {
-                      return Center(child: CircularProgressIndicator());
-                    }
-                  },
+                      ),
+                    ],
+                  ),
                 ),
               ],
-            ),
-          ),
-        ),
+            )),
       ),
     );
   }
