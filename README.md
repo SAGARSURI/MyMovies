@@ -12,6 +12,8 @@ Part 1: https://medium.com/flutterpub/architecting-your-flutter-project-bd04e144
 
 Part 2: https://medium.com/flutterpub/architect-your-flutter-project-using-bloc-pattern-part-2-d8dd1eca9ba5
 
+----------------
+
 Contact me at:
 
 sagarsuri56@gmail.com
