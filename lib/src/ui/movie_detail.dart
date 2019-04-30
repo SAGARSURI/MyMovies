@@ -57,6 +57,7 @@ class MovieDetailState extends State<MovieDetail> {
   void didChangeDependencies() {
     bloc = MovieDetailBlocProvider.of(context);
     bloc.fetchTrailersById(movieId);
+    print("recreated");
     super.didChangeDependencies();
   }
 
