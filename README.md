@@ -14,7 +14,7 @@ Part 2: https://medium.com/flutterpub/architect-your-flutter-project-using-bloc-
 
 ----------------
 
-Contact me at:
+Contact me:
 
 sagarsuri56@gmail.com
 
