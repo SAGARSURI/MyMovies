@@ -28,5 +28,3 @@ class MoviesBloc extends BlocBase {
     _moviesFetcher.close();
   }
 }
-
-//final bloc = MoviesBloc();
