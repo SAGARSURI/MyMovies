@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'ui/movie_list.dart';
 import 'package:inject/inject.dart';
-import 'di/bloc_module.dart';
 import 'ui/movie_detail.dart';
 import 'models/item_model.dart';
 import 'blocs/movies_bloc.dart';

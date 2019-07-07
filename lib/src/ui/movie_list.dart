@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/item_model.dart';
 import '../blocs/movies_bloc.dart';
-import 'package:inject/inject.dart';
 
 class MovieList extends StatefulWidget {
   final MoviesBloc _bloc;
