@@ -1,25 +1,28 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import '../blocs/movie_detail_bloc_provider.dart';
+import '../blocs/movie_detail_bloc.dart';
 import '../models/trailer_model.dart';
+import 'package:inject/inject.dart';
 
 class MovieDetail extends StatefulWidget {
-  final posterUrl;
-  final description;
-  final releaseDate;
+  final MovieDetailBloc bloc;
+  final String posterUrl;
+  final String description;
+  final String releaseDate;
   final String title;
   final String voteAverage;
   final int movieId;
 
-  MovieDetail({
+  MovieDetail(
+    this.bloc,
     this.title,
     this.posterUrl,
     this.description,
     this.releaseDate,
     this.voteAverage,
     this.movieId,
-  });
+  );
 
   @override
   State<StatefulWidget> createState() {
@@ -35,14 +38,12 @@ class MovieDetail extends StatefulWidget {
 }
 
 class MovieDetailState extends State<MovieDetail> {
-  final posterUrl;
-  final description;
-  final releaseDate;
+  final String posterUrl;
+  final String description;
+  final String releaseDate;
   final String title;
   final String voteAverage;
   final int movieId;
-
-  MovieDetailBloc bloc;
 
   MovieDetailState({
     this.title,
@@ -54,16 +55,15 @@ class MovieDetailState extends State<MovieDetail> {
   });
 
   @override
-  void didChangeDependencies() {
-    bloc = MovieDetailBlocProvider.of(context);
-    bloc.fetchTrailersById(movieId);
-    print("recreated");
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
+    widget.bloc.init();
+    widget.bloc.fetchTrailersById(movieId);
   }
 
   @override
   void dispose() {
-    bloc.dispose();
+    widget.bloc.dispose();
     super.dispose();
   }
 
@@ -144,7 +144,7 @@ class MovieDetailState extends State<MovieDetail> {
                       ),
                       Container(margin: EdgeInsets.only(top: 8.0, bottom: 8.0)),
                       StreamBuilder(
-                        stream: bloc.movieTrailers,
+                        stream: widget.bloc.movieTrailers,
                         builder: (context,
                             AsyncSnapshot<Future<TrailerModel>> snapshot) {
                           if (snapshot.hasData) {

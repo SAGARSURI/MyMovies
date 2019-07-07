@@ -10,10 +10,15 @@ dependencies:
   cupertino_icons: ^0.1.2
   rxdart: ^0.18.0
   http: ^0.12.0+1
+  inject:
+    path: ./injection/inject.dart/package/inject
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner: ^1.0.0
+  inject_generator:
+    path: ./injection/inject.dart/package/inject_generator
 
 
 # For information on the generic Dart part of this file, see the
