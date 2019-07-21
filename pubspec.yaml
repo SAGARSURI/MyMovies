@@ -11,14 +11,24 @@ dependencies:
   rxdart: ^0.18.0
   http: ^0.12.0+1
   inject:
-    path: ./injection/inject.dart/package/inject
+    git:
+      url: https://github.com/google/inject.dart.git
+      path: package/inject
+
+dependency_overrides:
+  analyzer: ^0.36.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^1.0.0
+
+  build_runner: ^1.6.1
+
   inject_generator:
-    path: ./injection/inject.dart/package/inject_generator
+    git:
+      url: https://github.com/google/inject.dart.git
+      path: package/inject_generator
+  mockito: ^4.1.0
 
 
 # For information on the generic Dart part of this file, see the

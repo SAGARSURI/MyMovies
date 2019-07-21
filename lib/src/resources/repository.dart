@@ -3,15 +3,16 @@ import 'movie_api_provider.dart';
 import '../models/item_model.dart';
 import '../models/trailer_model.dart';
 import 'package:inject/inject.dart';
+import '../models/state.dart';
 
 class Repository {
 
-  final MovieApiProvider moviesApiProvider;
+  final MovieApiProvider _moviesApiProvider;
 
   @provide
-  Repository(this.moviesApiProvider);
+  Repository(this._moviesApiProvider);
 
-  Future<ItemModel> fetchAllMovies() => moviesApiProvider.fetchMovieList();
+  Future<State> fetchAllMovies() => _moviesApiProvider.fetchMovieList();
 
-  Future<TrailerModel> fetchTrailers(int movieId) => moviesApiProvider.fetchTrailer(movieId);
+  Future<State> fetchTrailers(int movieId) => _moviesApiProvider.fetchTrailer(movieId);
 }

@@ -1,42 +1,35 @@
-import 'dart:async';
-
 import 'package:rxdart/rxdart.dart';
 import '../models/trailer_model.dart';
 import '../resources/repository.dart';
 import 'bloc_base.dart';
 import 'package:inject/inject.dart';
+import '../models/state.dart';
 
 class MovieDetailBloc extends BlocBase {
-
   final Repository _repository;
-  PublishSubject<int> _movieId;
-  BehaviorSubject<Future<TrailerModel>> _trailers;
+  BehaviorSubject<TrailerModel> _trailers;
 
   @provide
   MovieDetailBloc(this._repository);
 
-  Function(int) get fetchTrailersById => _movieId.sink.add;
-  Observable<Future<TrailerModel>> get movieTrailers => _trailers.stream;
+  void fetchTrailersById(id) async {
+    final state = await _repository.fetchTrailers(id);
+    if (state is SuccessState) {
+      _trailers.sink.add(state.value);
+    } else {
+      _trailers.addError((state as ErrorState).msg);
+    }
+  }
 
-  init(){
-    _movieId = PublishSubject<int>();
-    _trailers = BehaviorSubject<Future<TrailerModel>>();
-    _movieId.stream.transform(_itemTransformer()).pipe(_trailers);
+  Observable<TrailerModel> get movieTrailers => _trailers.stream;
+
+  init() {
+    _trailers = BehaviorSubject<TrailerModel>();
   }
 
   @override
   dispose() async {
-    _movieId.close();
     await _trailers.drain();
     _trailers.close();
-  }
-
-  _itemTransformer() {
-    return ScanStreamTransformer(
-      (Future<TrailerModel> trailer, int id, int index) {
-        trailer = _repository.fetchTrailers(id);
-        return trailer;
-      },
-    );
   }
 }
