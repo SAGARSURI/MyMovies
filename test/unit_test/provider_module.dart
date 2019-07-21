@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'mock_client.dart';
 
 @module
-class RepoModule{
+class ProviderModule{
 
   @provide
   @singleton

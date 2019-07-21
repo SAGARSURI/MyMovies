@@ -5,15 +5,15 @@ import 'package:my_movies/src/resources/movie_api_provider.dart';
 import 'package:my_movies/src/models/item_model.dart';
 import 'package:my_movies/src/models/trailer_model.dart';
 import 'package:my_movies/src/models/state.dart';
-import 'repo_injector.dart';
-import 'repo_module.dart';
+import 'provider_injector.dart';
+import 'provider_module.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 
 void main() {
   group("MovieApiProvider test", () {
     test("fetchMovieList success test", () async {
-      var container = await RepoTestInjector.create(RepoModule());
+      var container = await ProviderTestInjector.create(ProviderModule());
       var app = container.app;
       var mockClient = app.mockClient;
       when(mockClient.get(
@@ -30,7 +30,7 @@ void main() {
     });
 
     test("fetchMovieList fail test", () async {
-      var container = await RepoTestInjector.create(RepoModule());
+      var container = await ProviderTestInjector.create(ProviderModule());
       var app = container.app;
       var mockClient = app.mockClient;
       when(mockClient.get(
@@ -47,7 +47,7 @@ void main() {
     });
 
     test("fetchTrailer success test", () async {
-      var container = await RepoTestInjector.create(RepoModule());
+      var container = await ProviderTestInjector.create(ProviderModule());
       var app = container.app;
       var mockClient = app.mockClient;
       when(mockClient.get(
@@ -64,7 +64,7 @@ void main() {
     });
 
     test("fetchTrailer fail test", () async {
-      var container = await RepoTestInjector.create(RepoModule());
+      var container = await ProviderTestInjector.create(ProviderModule());
       var app = container.app;
       var mockClient = app.mockClient;
       when(mockClient.get(
@@ -82,10 +82,10 @@ void main() {
   });
 }
 
-class RepoTest {
+class ProviderTest {
   final MovieApiProvider movieApiProvider;
   final http.Client mockClient;
 
   @provide
-  RepoTest(this.movieApiProvider, this.mockClient) : super();
+  ProviderTest(this.movieApiProvider, this.mockClient) : super();
 }
