@@ -14,6 +14,8 @@ Part 2: https://medium.com/flutterpub/architect-your-flutter-project-using-bloc-
 
 Part 3: https://medium.com/@sagarsuri56/compile-time-dependency-injection-in-flutter-95bb190b4a71
 
+Part 4: https://medium.com/@sagarsuri56/integration-and-unit-testing-in-flutter-f08e4bd961d5
+
 ----------------
 
 Contact me:
