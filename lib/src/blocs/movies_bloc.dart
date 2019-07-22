@@ -6,14 +6,13 @@ import 'package:inject/inject.dart';
 import 'bloc_base.dart';
 
 class MoviesBloc extends BlocBase {
-
   final Repository _repository;
   PublishSubject<ItemModel> _moviesFetcher;
 
   @provide
   MoviesBloc(this._repository);
 
-  init(){
+  init() {
     _moviesFetcher = PublishSubject<ItemModel>();
   }
 
@@ -21,9 +20,9 @@ class MoviesBloc extends BlocBase {
 
   fetchAllMovies() async {
     State state = await _repository.fetchAllMovies();
-    if(state is SuccessState){
+    if (state is SuccessState) {
       _moviesFetcher.sink.add(state.value);
-    }else if(state is ErrorState){
+    } else if (state is ErrorState) {
       _moviesFetcher.addError(state.msg);
     }
   }

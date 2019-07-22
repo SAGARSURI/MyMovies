@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'movie_api_provider.dart';
-import '../models/item_model.dart';
-import '../models/trailer_model.dart';
 import 'package:inject/inject.dart';
 import '../models/state.dart';
 

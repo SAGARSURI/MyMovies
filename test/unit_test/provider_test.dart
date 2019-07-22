@@ -51,14 +51,14 @@ void main() {
       var app = container.app;
       var mockClient = app.mockClient;
       when(mockClient.get(
-          "http://api.themoviedb.org/3/movie/420818/videos?api_key=802b2c4b88ea1183e50e6b285a27696e"))
+              "http://api.themoviedb.org/3/movie/420818/videos?api_key=802b2c4b88ea1183e50e6b285a27696e"))
           .thenAnswer((_) async => http.Response(
-          '{"id": 420818,"results": [{"id": "5bf75c2f0e0a26266f0e1e04","iso_639_1": "en","iso_3166_1": "US","key": "4CbLXeGSDxg","name": "The Lion King Official Teaser Trailer","site": "YouTube","size": 1080,"type": "Teaser"}]}',
-          200,
-          headers: {
-            HttpHeaders.contentTypeHeader:
-            'application/json; charset=utf-8'
-          }));
+                  '{"id": 420818,"results": [{"id": "5bf75c2f0e0a26266f0e1e04","iso_639_1": "en","iso_3166_1": "US","key": "4CbLXeGSDxg","name": "The Lion King Official Teaser Trailer","site": "YouTube","size": 1080,"type": "Teaser"}]}',
+                  200,
+                  headers: {
+                    HttpHeaders.contentTypeHeader:
+                        'application/json; charset=utf-8'
+                  }));
       expect(await app.movieApiProvider.fetchTrailer(420818),
           isInstanceOf<SuccessState<TrailerModel>>());
     });
@@ -68,14 +68,11 @@ void main() {
       var app = container.app;
       var mockClient = app.mockClient;
       when(mockClient.get(
-          "http://api.themoviedb.org/3/movie/428/videos?api_key=802b2c4b88ea1183e50e6b285a27696e"))
+              "http://api.themoviedb.org/3/movie/428/videos?api_key=802b2c4b88ea1183e50e6b285a27696e"))
           .thenAnswer((_) async => http.Response(
-          '{"id": 428,"results": []}',
-          401,
-          headers: {
-            HttpHeaders.contentTypeHeader:
-            'application/json; charset=utf-8'
-          }));
+                  '{"id": 428,"results": []}', 401, headers: {
+                HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'
+              }));
       expect(await app.movieApiProvider.fetchTrailer(428),
           isInstanceOf<ErrorState>());
     });

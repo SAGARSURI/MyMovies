@@ -3,14 +3,14 @@ import 'package:my_movies/src/blocs/movies_bloc.dart';
 import 'package:my_movies/src/blocs/movie_detail_bloc.dart';
 import 'package:my_movies/src/models/item_model.dart';
 import 'package:my_movies/src/models/trailer_model.dart';
-import 'bloc_injector.dart';
-import 'bloc_module.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:my_movies/src/di/bloc_injector.dart';
+import 'package:my_movies/src/di/bloc_module.dart';
 
 void main() async {
   group("BloC testing", (){
     test("Movie BLoC testing", () async {
-      var container = await BlocTestInjector.create(BlocModule());
+      var container = await BlocInjector.create(BlocModule());
       var moviesBloc = container.app.moviesBloc;
       moviesBloc.init();
       moviesBloc.fetchAllMovies();
@@ -19,7 +19,7 @@ void main() async {
       }));
     });
     test("Movie Detail BLoC testing", () async {
-      var container = await BlocTestInjector.create(BlocModule());
+      var container = await BlocInjector.create(BlocModule());
       var moviesBloc = container.app.movieDetailBloc;
       moviesBloc.init();
       moviesBloc.fetchTrailersById(420818);

@@ -9,6 +9,12 @@ class MovieDetailBloc extends BlocBase {
   final Repository _repository;
   BehaviorSubject<TrailerModel> _trailers;
 
+  Observable<TrailerModel> get movieTrailers => _trailers.stream;
+
+  init() {
+    _trailers = BehaviorSubject<TrailerModel>();
+  }
+
   @provide
   MovieDetailBloc(this._repository);
 
@@ -19,12 +25,6 @@ class MovieDetailBloc extends BlocBase {
     } else {
       _trailers.addError((state as ErrorState).msg);
     }
-  }
-
-  Observable<TrailerModel> get movieTrailers => _trailers.stream;
-
-  init() {
-    _trailers = BehaviorSubject<TrailerModel>();
   }
 
   @override
