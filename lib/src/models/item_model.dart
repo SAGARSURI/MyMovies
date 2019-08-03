@@ -32,7 +32,7 @@ class _Result {
   bool _video;
   String _vote_average;
   String _title;
-  double _popularity;
+  String _popularity;
   String _poster_path;
   String _original_language;
   String _original_title;
@@ -48,7 +48,7 @@ class _Result {
     _video = result['video'];
     _vote_average = result['vote_average'].toString();
     _title = result['title'];
-    _popularity = result['popularity'];
+    _popularity = result['popularity'].toString();
     _poster_path = result['poster_path'];
     _original_language = result['original_language'];
     _original_title = result['original_title'];
@@ -77,7 +77,7 @@ class _Result {
 
   String get poster_path => _poster_path;
 
-  double get popularity => _popularity;
+  String get popularity => _popularity;
 
   String get title => _title;
 

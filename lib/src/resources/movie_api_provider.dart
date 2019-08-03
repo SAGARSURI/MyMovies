@@ -9,10 +9,10 @@ class MovieApiProvider {
   final _apiKey = 'api-key';
   final _baseUrl = "http://api.themoviedb.org/3/movie";
 
-  Future<ItemModel> fetchMovieList() async {
+  Future<ItemModel> fetchMovieList(int page) async {
     Response response;
     if(_apiKey != 'api-key') {
-       response = await client.get("$_baseUrl/popular?api_key=$_apiKey");
+       response = await client.get("$_baseUrl/popular?api_key=$_apiKey&page=$page");
     }else{
       throw Exception('Please add your API key');
     }
