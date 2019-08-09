@@ -29,6 +29,12 @@ class MovieListState extends State<MovieList> {
     });
   }
 
+  Future<Null> _handleRefresh() async {
+    _page = 1;
+    bloc.fetchAllMovies(_page);
+    return null;
+  }
+
   @override
   void dispose() {
     _scrollController.dispose();
@@ -57,24 +63,26 @@ class MovieListState extends State<MovieList> {
   }
 
   Widget buildList(AsyncSnapshot<ItemModel> snapshot) {
-    return GridView.builder(
-      controller: _scrollController,
-        itemCount: snapshot.data.results.length,
-        gridDelegate:
-        new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemBuilder: (BuildContext context, int index) {
-          return GridTile(
-            child: InkResponse(
-              enableFeedback: true,
-              child: Image.network(
-                'https://image.tmdb.org/t/p/w185${snapshot.data
-                    .results[index].poster_path}',
-                fit: BoxFit.cover,
+    return RefreshIndicator(
+      onRefresh: _handleRefresh,
+      child: GridView.builder(
+          controller: _scrollController,
+          itemCount: snapshot.data.results.length,
+          gridDelegate:
+              new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+          itemBuilder: (BuildContext context, int index) {
+            return GridTile(
+              child: InkResponse(
+                enableFeedback: true,
+                child: Image.network(
+                  'https://image.tmdb.org/t/p/w185${snapshot.data.results[index].poster_path}',
+                  fit: BoxFit.cover,
+                ),
+                onTap: () => openDetailPage(snapshot.data, index),
               ),
-              onTap: () => openDetailPage(snapshot.data, index),
-            ),
-          );
-        });
+            );
+          }),
+    );
   }
 
   openDetailPage(ItemModel data, int index) {

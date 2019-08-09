@@ -10,6 +10,10 @@ class MoviesBloc {
   Observable<ItemModel> get allMovies => _moviesFetcher.stream;
 
   fetchAllMovies(int page) async {
+    if (page == 1 && _moviesFetcher.value != null) {
+      _moviesFetcher.sink.add(null);
+    }
+
     if (page <= totalPages) {
       ItemModel itemModel = await _repository.fetchAllMovies(page);
       if (_moviesFetcher.value == null) {
