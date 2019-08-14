@@ -28,9 +28,12 @@ Part 4: https://medium.com/@sagarsuri56/integration-and-unit-testing-in-flutter-
 
 Let me know what are the other topics you would like me to write on.
 
-----------------
+# Features added:
 
-Contact me:
+1) Pagination (separate branch)
+2) Pull to refresh (in progress)
+
+## Contact me:
 
 sagarsuri56@gmail.com
 
