@@ -12,26 +12,14 @@ class MovieList extends StatefulWidget {
 }
 
 class MovieListState extends State<MovieList> {
-  int _page = 1;
-  ScrollController _scrollController = new ScrollController();
-  bool isLoading = false;
-
   @override
   void initState() {
     super.initState();
-    bloc.fetchAllMovies(_page);
-
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
-        bloc.fetchAllMovies(++_page);
-      }
-    });
+    bloc.fetchAllMovies();
   }
 
   @override
   void dispose() {
-    _scrollController.dispose();
     bloc.dispose();
     super.dispose();
   }
@@ -58,7 +46,6 @@ class MovieListState extends State<MovieList> {
 
   Widget buildList(AsyncSnapshot<ItemModel> snapshot) {
     return GridView.builder(
-      controller: _scrollController,
         itemCount: snapshot.data.results.length,
         gridDelegate:
         new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
