@@ -11,9 +11,10 @@ class MovieApiProvider {
 
   Future<ItemModel> fetchMovieList(int page) async {
     Response response;
-    if(_apiKey != 'api-key') {
-       response = await client.get("$_baseUrl/popular?api_key=$_apiKey&page=$page");
-    }else{
+    if (_apiKey != 'api-key') {
+      response =
+          await client.get("$_baseUrl/popular?api_key=$_apiKey&page=$page");
+    } else {
       throw Exception('Please add your API key');
     }
     if (response.statusCode == 200) {
