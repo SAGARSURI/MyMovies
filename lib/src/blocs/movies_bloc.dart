@@ -4,8 +4,7 @@ import '../models/item_model.dart';
 
 class MoviesBloc {
   final _repository = Repository();
-  final _moviesFetcher = BehaviorSubject<ItemModel>();
-  int totalPages = 1;
+  final _moviesFetcher = PublishSubject<ItemModel>();
 
   Observable<ItemModel> get allMovies => _moviesFetcher.stream;
 

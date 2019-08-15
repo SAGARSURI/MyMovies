@@ -12,21 +12,10 @@ class MovieList extends StatefulWidget {
 }
 
 class MovieListState extends State<MovieList> {
-  int _page = 1;
-  ScrollController _scrollController = new ScrollController();
-  bool isLoading = false;
-
   @override
   void initState() {
     super.initState();
-    bloc.fetchAllMovies(_page);
-
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
-        bloc.fetchAllMovies(++_page);
-      }
-    });
+    bloc.fetchAllMovies();
   }
 
   Future<Null> _handleRefresh() async {
@@ -37,7 +26,6 @@ class MovieListState extends State<MovieList> {
 
   @override
   void dispose() {
-    _scrollController.dispose();
     bloc.dispose();
     super.dispose();
   }
